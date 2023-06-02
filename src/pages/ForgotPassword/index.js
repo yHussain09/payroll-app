@@ -1,6 +1,9 @@
 import React from "react";
+import { Form, useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       {/* <!-- Outer Row --> */}
@@ -41,12 +44,24 @@ function ForgotPassword() {
                     </form>
                     <hr />
                     <div className="text-center">
-                      <a className="small" href="register.html">
+                      <a
+                        className="small"
+                        onClick={() => {
+                          navigate("/register");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
                         Create an Account!
                       </a>
                     </div>
                     <div className="text-center">
-                      <a className="small" href="login.html">
+                      <a
+                        className="small"
+                        onClick={() => {
+                          navigate("/login");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
                         Already have an account? Login!
                       </a>
                     </div>

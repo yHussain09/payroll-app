@@ -1,6 +1,9 @@
 import React from "react";
+import { Form, useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <div className="card o-hidden border-0 shadow-lg my-5">
@@ -64,29 +67,41 @@ function Register() {
                   >
                     Register Account
                   </a>
-                  <hr />
-                  <a
+                  {/* <hr /> */}
+                  {/* <a
                     href="index.html"
                     className="btn btn-google btn-user btn-block"
                   >
                     <i className="fab fa-google fa-fw"></i> Register with Google
-                  </a>
-                  <a
+                  </a> */}
+                  {/* <a
                     href="index.html"
                     className="btn btn-facebook btn-user btn-block"
                   >
                     <i className="fab fa-facebook-f fa-fw"></i> Register with
                     Facebook
-                  </a>
+                  </a> */}
                 </form>
                 <hr />
                 <div className="text-center">
-                  <a className="small" href="forgot-password.html">
+                  <a
+                    className="small"
+                    onClick={() => {
+                      navigate("/forgotPassword");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
                     Forgot Password?
                   </a>
                 </div>
                 <div className="text-center">
-                  <a className="small" href="login.html">
+                  <a
+                    className="small"
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
                     Already have an account? Login!
                   </a>
                 </div>

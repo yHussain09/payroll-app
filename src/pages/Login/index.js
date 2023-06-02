@@ -1,14 +1,25 @@
-import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Dashboard from "../Dashboard";
+import React, { useState } from "react";
+import { Form, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
-  const routeToDashboard = () => {
-    console.log("routeToDashboard call");
-    navigate("/dashboard");
-    console.log("routeToDashboard navigate call");
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+    if (inputs.email === "admin" && inputs.password === "admin") {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="container">
       {/* <!-- Outer Row --> */}
@@ -24,22 +35,32 @@ export default function Login() {
                     <div className="text-center">
                       <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                     </div>
-                    <form className="user">
+                    <form
+                      id="contact-form"
+                      className="user"
+                      onSubmit={handleSubmit}
+                    >
                       <div className="form-group">
                         <input
-                          type="email"
+                          type="text"
+                          name="email"
+                          value={inputs.email || ""}
                           className="form-control form-control-user"
                           id="exampleInputEmail"
                           aria-describedby="emailHelp"
                           placeholder="Enter Email Address..."
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="form-group">
                         <input
                           type="password"
+                          name="password"
+                          value={inputs.password || ""}
                           className="form-control form-control-user"
                           id="exampleInputPassword"
                           placeholder="Password"
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="form-group">
@@ -57,36 +78,38 @@ export default function Login() {
                           </label>
                         </div>
                       </div>
-                      <a
+                      <button
                         className="btn btn-primary btn-user btn-block"
-                        onClick={routeToDashboard}
+                        type="submit"
+                        // onClick={() => {
+                        //   navigate("/");
+                        // }}
                       >
                         Login
-                      </a>
-                      <hr />
-                      <a
-                        href="index.html"
-                        className="btn btn-google btn-user btn-block"
-                      >
-                        <i className="fab fa-google fa-fw"></i> Login with
-                        Google
-                      </a>
-                      <a
-                        href="index.html"
-                        className="btn btn-facebook btn-user btn-block"
-                      >
-                        <i className="fab fa-facebook-f fa-fw"></i> Login with
-                        Facebook
-                      </a>
+                      </button>
+                      {/* <hr /> */}
                     </form>
+
                     <hr />
                     <div className="text-center">
-                      <a className="small" href="forgot-password.html">
+                      <a
+                        className="small"
+                        onClick={() => {
+                          navigate("/forgotPassword");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
                         Forgot Password?
                       </a>
                     </div>
                     <div className="text-center">
-                      <a className="small" href="register.html">
+                      <a
+                        className="small"
+                        onClick={() => {
+                          navigate("/register");
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
                         Create an Account!
                       </a>
                     </div>
